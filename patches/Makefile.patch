@@ -1,0 +1,20 @@
+diff --git a/Makefile b/Makefile
+index 6248ad1..3a83d61 100644
+--- a/Makefile
++++ b/Makefile
+@@ -40,12 +40,15 @@ BINARYLOONG64  := fzf-$(GOOS)_loong64
+ 
+ # https://en.wikipedia.org/wiki/Uname
+ UNAME_M := $(shell uname -m)
++UNAME_S := $(shell uname -s)
+ ifeq ($(UNAME_M),x86_64)
+ 	BINARY := $(BINARY64)
+ else ifeq ($(UNAME_M),amd64)
+ 	BINARY := $(BINARY64)
+ else ifeq ($(UNAME_M),s390x)
+ 	BINARY := $(BINARYS390)
++else ifeq ($(UNAME_S),OS/390)
++	BINARY := $(BINARYS390)
+ else ifeq ($(UNAME_M),i686)
+ 	BINARY := $(BINARY32)
+ else ifeq ($(UNAME_M),i386)

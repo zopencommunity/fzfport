@@ -1,0 +1,46 @@
+export ZOPEN_GIT_URL="https://github.com/junegunn/fzf.git"
+export ZOPEN_GIT_DEPS="make"
+export ZOPEN_TYPE="GIT"
+export ZOPEN_CONFIGURE="skip"
+export ZOPEN_COMP=GO
+
+zopen_check_results()
+{
+  dir="$1"
+  pfx="$2"
+  chk="$1/$2_check.log"
+
+  # Echo the following information to gauge build health
+  echo "actualFailures:0"
+  echo "totalTests:1"
+  echo "expectedFailures:0"
+}
+
+zopen_pre_install()
+{
+  set +e
+  # echo envars outside of PATH, MANPATH, LIBPATH
+  mkdir -p $ZOPEN_INSTALL_DIR
+  cp -r bin $ZOPEN_INSTALL_DIR/bin
+  set -e
+}
+
+zopen_post_install()
+{
+  set +e
+  # echo envars outside of PATH, MANPATH, LIBPATH
+ # cp -r bin $ZOPEN_INSTALL_DIR/bin
+  set -e
+}
+
+zopen_append_to_setup()
+{
+  # echo commands that will run when installing via setup.sh
+}
+
+zopen_get_version()
+{
+  # Modify to echo the version of your tool/library
+  # Rather than hardcoding the version, obtain the version by running the tool/library
+  echo "1.0.0"
+}
