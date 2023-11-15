@@ -1,6 +1,11 @@
-export ZOPEN_GIT_URL="https://github.com/junegunn/fzf.git"
-export ZOPEN_GIT_DEPS="make"
-export ZOPEN_TYPE="GIT"
+# bump: fzf-version /FZF_VERSION="(.*)"/ https://github.com/junegunn/fzf.git|semver:*
+FZF_VERSION="0.43.0"
+
+export ZOPEN_DEV_URL="https://github.com/junegunn/fzf.git"
+export ZOPEN_DEV_DEPS="make"
+export ZOPEN_STABLE_URL="https://github.com/junegunn/fzf/archive/refs/tags/${FZF_VERSION}.zip"
+export ZOPEN_STABLE_DEPS="make"
+export ZOPEN_BUILD_LINE="DEV"
 export ZOPEN_CONFIGURE="skip"
 export ZOPEN_COMP=GO
 
@@ -40,7 +45,5 @@ zopen_append_to_setup()
 
 zopen_get_version()
 {
-  # Modify to echo the version of your tool/library
-  # Rather than hardcoding the version, obtain the version by running the tool/library
-  echo "1.0.0"
+  echo "$FZF_VERSION"
 }
