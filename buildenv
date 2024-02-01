@@ -1,5 +1,5 @@
 # bump: fzf-version /FZF_VERSION="(.*)"/ https://github.com/junegunn/fzf.git|semver:*
-FZF_VERSION="0.43.0"
+FZF_VERSION="0.46.1"
 
 export ZOPEN_DEV_URL="https://github.com/junegunn/fzf.git"
 export ZOPEN_DEV_DEPS="make"
