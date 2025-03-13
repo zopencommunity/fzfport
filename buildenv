@@ -7,6 +7,7 @@ export ZOPEN_DEV_DEPS="make"
 export ZOPEN_STABLE_URL="https://github.com/junegunn/fzf.git"
 export ZOPEN_STABLE_TAG="v${FZF_VERSION}"
 export ZOPEN_STABLE_DEPS="make zip unzip"
+export ZOPEN_CLONE_FULL="yes"
 export ZOPEN_BUILD_LINE="STABLE"
 export ZOPEN_CONFIGURE="skip"
 export ZOPEN_COMP=GO
