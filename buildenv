@@ -10,6 +10,7 @@ export ZOPEN_STABLE_DEPS="make zip unzip"
 export ZOPEN_BUILD_LINE="STABLE"
 export ZOPEN_CONFIGURE="skip"
 export ZOPEN_COMP=GO
+export ZOPEN_INSTALL="zopen_install"
 
 zopen_check_results()
 {
@@ -23,13 +24,10 @@ zopen_check_results()
   echo "expectedFailures:0"
 }
 
-zopen_pre_install()
+zopen_install()
 {
-  set +e
-  # echo envars outside of PATH, MANPATH, LIBPATH
-  mkdir -p $ZOPEN_INSTALL_DIR
-  cp -r bin $ZOPEN_INSTALL_DIR/bin
-  set -e
+  mkdir -p "$ZOPEN_INSTALL_DIR"
+  cp -r bin/ $ZOPEN_INSTALL_DIR/bin/
 }
 
 zopen_append_to_setup()
