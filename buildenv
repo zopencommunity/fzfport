@@ -12,6 +12,7 @@ export ZOPEN_STABLE_DEPS="make zip unzip"
 export ZOPEN_BUILD_LINE="STABLE"
 export ZOPEN_CLONE_SUBMODULES="yes"
 export ZOPEN_CONFIGURE="skip"
+export ZOPEN_INSTALL="zopen_install"
 export ZOPEN_COMP=GO
 
 zopen_check_results()
@@ -26,20 +27,12 @@ zopen_check_results()
   echo "expectedFailures:0"
 }
 
-zopen_pre_install()
+zopen_install()
 {
   set +e
-  # echo envars outside of PATH, MANPATH, LIBPATH
+  make install "$@"
   mkdir -p $ZOPEN_INSTALL_DIR
   cp -r bin $ZOPEN_INSTALL_DIR/bin
-  set -e
-}
-
-zopen_post_install()
-{
-  set +e
-  # echo envars outside of PATH, MANPATH, LIBPATH
- # cp -r bin $ZOPEN_INSTALL_DIR/bin
   set -e
 }
 
