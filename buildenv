@@ -10,6 +10,7 @@ export ZOPEN_STABLE_DEPS="make zip unzip"
 export ZOPEN_CLONE_FULL="yes"
 export ZOPEN_BUILD_LINE="STABLE"
 export ZOPEN_CONFIGURE="skip"
+export ZOPEN_INSTALL="zopen_install"
 export ZOPEN_COMP=GO
 export ZOPEN_INSTALL="zopen_install"
 
@@ -27,8 +28,11 @@ zopen_check_results()
 
 zopen_install()
 {
-  mkdir -p "$ZOPEN_INSTALL_DIR"
-  cp -r bin/ $ZOPEN_INSTALL_DIR/bin/
+  set +e
+  make install "$@"
+  mkdir -p $ZOPEN_INSTALL_DIR
+  cp -r bin $ZOPEN_INSTALL_DIR/bin
+  set -e
 }
 
 zopen_append_to_setup()
