@@ -12,7 +12,6 @@ export ZOPEN_BUILD_LINE="STABLE"
 export ZOPEN_CONFIGURE="skip"
 export ZOPEN_INSTALL="zopen_install"
 export ZOPEN_COMP=GO
-export ZOPEN_INSTALL="zopen_install"
 
 zopen_check_results()
 {
