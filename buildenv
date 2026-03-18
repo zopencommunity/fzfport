@@ -1,17 +1,27 @@
 # bump: fzf-version /FZF_VERSION="(.*)"/ https://github.com/junegunn/fzf.git|semver:*
-FZF_VERSION="0.65.2"
+FZF_VERSION="0.70.0"
 
 export ZOPEN_DEV_URL="https://github.com/junegunn/fzf.git"
 export ZOPEN_CATEGORIES="utilities"
 export ZOPEN_DEV_DEPS="make"
 export ZOPEN_STABLE_URL="https://github.com/junegunn/fzf.git"
 export ZOPEN_STABLE_TAG="v${FZF_VERSION}"
-export ZOPEN_STABLE_DEPS="make zip unzip"
+export ZOPEN_STABLE_DEPS="make grep"
 export ZOPEN_CLONE_FULL="yes"
 export ZOPEN_BUILD_LINE="STABLE"
 export ZOPEN_CONFIGURE="skip"
 export ZOPEN_INSTALL="zopen_install"
 export ZOPEN_COMP=GO
+export ZOPEN_MAKE_MINIMAL="Y"
+export ZOPEN_CHECK_OPTS="test"
+export ZOPEN_CHECK_MINIMAL="Y"
+
+zopen_init()
+{
+  export CGO_ENABLED=0
+  export GOBIN=$ZOPEN_INSTALL_DIR/bin
+  export PATH=$PATH:$GOROOT/go-build-zos/bin
+}
 
 zopen_check_results()
 {
@@ -19,10 +29,17 @@ zopen_check_results()
   pfx="$2"
   chk="$1/$2_check.log"
 
+  actualFailures=0
+  totalTests=0
+  actualFailures=$(grep -c -- "--- FAIL:" "$chk")
+  passes=$(grep -c -- "--- PASS:" "$chk")
+  skips=$(grep -c -- "--- SKIP:" "$chk")
+  totalTests=$((actualFailures + passes + skips))
+
   # Echo the following information to gauge build health
-  echo "actualFailures:0"
-  echo "totalTests:1"
-  echo "expectedFailures:0"
+  echo "actualFailures:$actualFailures"
+  echo "totalTests:$totalTests"
+  echo "expectedFailures:3"
 }
 
 zopen_install()
@@ -31,6 +48,10 @@ zopen_install()
   make install "$@"
   mkdir -p $ZOPEN_INSTALL_DIR
   cp -r bin $ZOPEN_INSTALL_DIR/bin
+  if [ -d man ]; then
+    mkdir -p $ZOPEN_INSTALL_DIR/share/man
+    cp -r man/man1 $ZOPEN_INSTALL_DIR/share/man/man1
+  fi
   set -e
 }
 
