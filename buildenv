@@ -16,6 +16,13 @@ export ZOPEN_MAKE_MINIMAL="Y"
 export ZOPEN_CHECK_OPTS="test"
 export ZOPEN_CHECK_MINIMAL="Y"
 
+zopen_init()
+{
+  export CGO_ENABLED=0
+  export GOBIN=$ZOPEN_INSTALL_DIR/bin
+  export PATH=$PATH:$GOROOT/go-build-zos/bin
+}
+
 zopen_check_results()
 {
   dir="$1"
